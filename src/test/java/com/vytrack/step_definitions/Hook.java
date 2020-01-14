@@ -27,8 +27,9 @@ public class Hook {
             System.out.println("Cleanup!");
             System.out.println("Test completed!");
         }
+
         System.out.println("##############################");
-        //after every test, we gonna close browser
+        //after every test, we are gonna close browser
         Driver.close();
     }
 }

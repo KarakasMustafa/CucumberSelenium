@@ -17,8 +17,23 @@ public class CucumberBeginningNotes {
     we can use Feature only once inside the feature file but multiple scenarios.
 
     And we implement the codes inside the step_definitions package by getting help from the Cucumber runner
-    (We
 
+    #################################################################
+
+    in cucumber, we can create
+
+
+     */
+
+    /*
+    12/19/2019
+
+        Background is a pre-condition for every test scenario in one particular feature file. Instead of repeating same
+        test steps for every scenario, we can put these steps into background.
+
+        Flow of execution:
+
+        hook ==>    background  ==>
 
      */
 }

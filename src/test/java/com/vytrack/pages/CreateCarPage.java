@@ -100,14 +100,20 @@ public class CreateCarPage extends BasePage {
         logoElement.sendKeys(pathToTheFile);
     }
 
-    public void clickSaveAndAddNew(){
+    /**
+     * this method will click the toggle and click on SaveAndAddNew button
+     */
+    public void clickSaveAndAddNew() {
         waitUntilLoaderMaskDisappear();
         BrowserUtils.clickWithWait(saveAndCloseToggle);
         BrowserUtils.waitForVisibility(saveAndNew, 5);
         BrowserUtils.clickWithWait(saveAndNew);
     }
 
-    public void clickSaveAndClose(){
+    /**
+     * This method will click dropdown toggle and click on clickAndClose
+     */
+    public void clickSaveAndClose() {
         waitUntilLoaderMaskDisappear();
         BrowserUtils.clickWithWait(saveAndCloseToggle);
         BrowserUtils.waitForVisibility(saveAndCloseButtonFromMenuElement, 5);

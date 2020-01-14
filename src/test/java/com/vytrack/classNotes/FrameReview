@@ -1,0 +1,77 @@
+
+Parallel testing
+How to create regression suit
+Passing browser type from terminal:
+    mvn test -Dbrowser=firefox
+
+Summary of cucumber framework
+
+##########################################################
+
+Thread --> is a path of execution.
+
+mvn verify -Dbrowser=firefox --> to run with firefox
+mvn verify -Dbrowser=chrome --> to run with chrome
+
+if report is failing, run with test goal
+
+to read browser parameter in our project, use System.getProperty("browser")
+
+we can pass any parameter from command line.
+
+driverPool is like a map , whenever it finds a new browser, it will add to ThreadLocal
+
+
+
+
+
+#######################################################################3
+TDD - Test Driven Development ( when we create unit tests first and then develop a functionality)
+
+DDT - Data Driven Testing (when our test data is separated from code. Instead of having tests data written as java
+variables, we pull test data from external source, such as feature file, excel file or cvs file)
+
+BDD - Behavior Driven Development ( in simple words , we write tests from end-user perspectiive.
+
+Feature: Reset password
+As a user, I want to be able to reset password
+
+    Scenario: reset password by using email
+    Given user is on the landing page
+    Then user click on "reset password" button
+    And user enters valid email "email@email.com" to receive reset link
+
+To write test scenarios, we use domain specific language  - Gherkin.
+
+PO tells what she wants --> BA writes down requirements into Jira Stories ---> Developers,Testers, BA, and other
+people are looking into same business requirements.
+We develop test scenarios based on Acceptance Criteria.
+
+There is no one correct way, every project is unique. So you can say pretty much anything.
+
+****** Tell me about your framework?
+
+in my current project , we use Java along with Maven.Our framework's combination of BDD and DDT frameworks so
+we call it Hybrid.
+We use Cucumber as a BDD tool to develop test scenarios from end-user perspective. Thus, our test scenarios are readable
+for non-technical people.We store test scenarios in feature files. Also, we follow Page Object Model pattern.
+Basically we create corresponded page class for every page of application. It helps to organize code, specifically
+WebElements and separate test from page logic.
+Every page class stores web elements and relevant to the particular page functional methods. For example for login page
+we have LoginPage.java class, under pages package. We use ThreadLocal driver to ensure thread safety and run tests in
+parallel. Besides pages package, we have package with step definitions where we store code implementation for cucumber
+test steps. Then we have utilities package, where we store reusable methods and Driver class. For configuration,
+we properties file. Last but not least, We schedule smoke and regression tests in Jenkins by pulling code from github.
+
+
+Cucumber Flow:
+    Feature file: inside feature file we write scenarios
+            Every scenario consists of test steps/
+            Every test step must start with gherkin keyword: Given, When, Then, And,But
+            Every test step also has a code implementation, which calls step definitions.
+            Inside step definition, we perform actions and assertions , by using page objects
+
+
+Maven is a project build tool and also used to manage dependencies.Maven has its own life-cycle( it's a group of commands
+that maven executes to build, test and deploy project)
+

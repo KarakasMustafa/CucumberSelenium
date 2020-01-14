@@ -26,7 +26,7 @@ public class CreateCarStepDefinitions {
 //            | SomePlates    | Super Driver| Reston, VA      | 2012       | Red   |
 //      dataTable.get(0).get("Model Year") = 2020
 //    get(0) - means get data from first row (excluding column names or header)
-//    .get("Model Year") - get value of Model Year
+//    .get("Model Year") - get value of Model Year , Model Year is the key name
 
     @Then("user adds new car information:")
     public void user_adds_new_car_information(List<Map<String, String>> dataTable) {

@@ -1,6 +1,8 @@
 package com.vytrack.pages;
 
 import com.vytrack.utilities.BrowserUtils;
+import com.vytrack.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,71 +10,72 @@ import java.util.List;
 
 public class CreateVehicleCostsPage extends BasePage{
 
-    @FindBy(xpath = "//div[@class=\"pull-right title-buttons-container\"]")
+    @FindBy(xpath = "//div[normalize-space()='Create Vehicle Costs']")
     public WebElement createVehicleCostsElement;
 
-    @FindBy(xpath = "//ul[@class=\"select2-results\"]//li")
-    public List<WebElement> TypesList;
+    @FindBy(xpath = "//div[@class=\"controls\"]//div[1]//a//span[@class='select2-chosen']")
+    public WebElement chooseAValueElement;
 
-    @FindBy(xpath = "//div[@class=\"controls\"]//input[@name=\"custom_entity_type[TotalPrice]\"]")
-    public WebElement totalPriceElement;
+    @FindBy(className = "select2-result-label")
+    public List<WebElement> ValueTypes;
 
-    @FindBy(id = "//input[@placeholder=\"Choose a date\"]")
-    public WebElement chooseADateElement;
+    @FindBy(name = "custom_entity_type[TotalPrice]")
+    public WebElement totalPrice;
 
-    @FindBy(name = "//div[@class=\"controls\"]//textarea")
-    public WebElement descriptionElement;
+    @FindBy(xpath = "//input[@placeholder='Choose a date']")
+    public WebElement dateElement;
 
-    @FindBy(className = "btn-success btn dropdown-toggle")
-    public WebElement saveToggle;
+    @FindBy(xpath = "//button[@data-handler=\"today\"]")
+    public WebElement todayElement;
 
-    @FindBy(xpath = "//button[@class=\"btn btn-success action-button\"]")
+    @FindBy(className = "ui-datepicker-month")
+    public List<WebElement> monthElement;
+
+    @FindBy(xpath = "//td[@data-handler='selectDay']")
+    public List<WebElement> dayElement;
+
+    @FindBy(className = "ui-datepicker-year")
+    public static List<WebElement> yearElement;
+
+    @FindBy(name = "custom_entity_type[CostDescriptions]")
+    public WebElement costDescriptionElement;
+
+    @FindBy(xpath = "//div[@class=\"btn-group pull-right\"]")
     public WebElement saveAndCloseElement;
 
-    @FindBy(xpath = "//ul[@class=\"dropdown-menu\"]//li[2]//button")
-    public WebElement saveAndNewElement;
 
-    @FindBy(xpath = "//ul[@class=\"dropdown-menu\"]//li[3]//button")
-    public WebElement save;
+    /**
+     * this method takes the type of cost
+     * and selects the type of cost by type
+     * For example if the type is 'Road Assistance' , it will select it.
+     * @param type
+     * @return
+     */
+    public WebElement selectType(String type){
+        String locator = "//div[@class='select2-result-label' and text()='" + type + "']";
 
+        WebElement typeOfCost = Driver.get().findElement(By.xpath(locator));
+        BrowserUtils.waitForVisibility(typeOfCost, 15);
+        BrowserUtils.waitForClickablility(typeOfCost, 15);
 
-    // this will look if createVehicleCosts Element is visible and clickable, then will click
+        typeOfCost.click();
+        return typeOfCost;
+    }
+
     public void clickToCreateVehicleCosts(){
-        waitUntilLoaderMaskDisappear();
-        BrowserUtils.waitForVisibility(createVehicleCostsElement,5);
-        BrowserUtils.waitForClickablility(createVehicleCostsElement,5);
+        BrowserUtils.waitForVisibility(createVehicleCostsElement,15);
+        BrowserUtils.waitForClickablility(createVehicleCostsElement,15);
         createVehicleCostsElement.click();
     }
 
-    // we will choose the type of cost in this method.
-    public void typeOfCosts(String typeOfCost){
-      //  TypesList.get(TypesList.indexOf(typeOfCost));
-        for(WebElement type : TypesList){
-            if(type.equals(typeOfCost)){
-                type.click();
-            }
-        }
-    }
+    public void selectDate(int day, String month, String year){
 
-    public void setTotalPrice(String totalPrice){
-        totalPriceElement.sendKeys(totalPrice);
-    }
+        dateElement.click();
+        BrowserUtils.waitForVisibility(dayElement.get(day),10);
+        BrowserUtils.waitForClickablility(dayElement.get(day),10);
+        dayElement.get(day).click();
 
-    public void chooseDate(String date){
-        BrowserUtils.waitForVisibility(chooseADateElement,5);
-        chooseADateElement.click();
-        chooseADateElement.sendKeys(date, Keys.ENTER);
 
-    }
-
-    public void costDescription(String description){
-        descriptionElement.sendKeys(description);
-    }
-
-    public void clickSaveAndNew(){
-        BrowserUtils.waitForVisibility(saveAndNewElement,5);
-        BrowserUtils.waitForClickablility(saveAndNewElement,5);
-        saveAndNewElement.click();
     }
 
 }

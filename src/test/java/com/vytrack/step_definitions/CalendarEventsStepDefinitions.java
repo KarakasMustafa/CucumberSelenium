@@ -4,12 +4,11 @@ import com.vytrack.pages.CalendarEventsPage;
 import com.vytrack.utilities.BrowserUtils;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-
 import java.util.List;
 
 public class CalendarEventsStepDefinitions {
 
-    //    And user verifies that column names are displayed
+//    And user verifies that column names are displayed
 //            | TITLE             |
 //            | CALENDAR          |
 //            | START             |
@@ -26,6 +25,5 @@ public class CalendarEventsStepDefinitions {
         BrowserUtils.wait(3);
         Assert.assertEquals(dataTable, calendarEventsPage.getColumnNames());
     }
-
 
 }
